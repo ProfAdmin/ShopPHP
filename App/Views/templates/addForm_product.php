@@ -12,7 +12,6 @@
 <div class="container text-left">
     <div class="row">
         <div class="col-6">
-            <?php if ($productId == ''): ?>
                 <form action="/product/add" method="post">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -32,21 +31,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="category" class="form-label">Category</label>
-                        <select class="form-select" aria-label="Select category" id="category" name="category">
-                            <?= $valueCategory; ?>
+                        <select class="form-select" aria-label="Select category" id="category" name="categoryId">
+                            <?php
+                            foreach ($listCategories as $category) {
+                                echo "<option value=\"{$category->id}\">{$category->name}</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Add product</button>
                 </form>
-            <?php else: ?>
-
-                <h3>Product added</h3>
-                <div class="mb-3">
-                    <a class="btn btn-primary" href="/product/add" role="button">Add Product</a>
-                    <a class="btn btn-primary" href="/" role="button">Go Home</a>
-                </div>
-
-            <?php endif ?>
         </div>
     </div>
 </div>

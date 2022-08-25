@@ -5,7 +5,7 @@ services:
     ports:
       - "6080:80"
     volumes:
-      - ./php:/var/www/html
+      - ./App:/var/www/html
     environment:
       XDEBUG_CONFIG: "client_host=host.docker.internal"
   mysql:

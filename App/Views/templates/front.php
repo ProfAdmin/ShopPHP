@@ -13,8 +13,8 @@
     <div class="row">
         <div class="col-6">
                 <div class="mb-3">
-                    <a class="btn btn-primary" href="/product/add" role="button">Add Product</a>
-                    <a class="btn btn-primary" href="/product/category" role="button">Category</a>
+                    <a class="btn btn-primary" href="/product/addForm" role="button">Add Product</a>
+                    <a class="btn btn-primary" href="/category/view" role="button">Category</a>
                 </div>
         </div>
     </div>
