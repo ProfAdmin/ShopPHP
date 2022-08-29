@@ -1,14 +1,14 @@
 <?php
 
-namespace Views;
+namespace View;
 
-class Views {
+class View {
 
     public static function render(string $tpl, array $data=null): void
     {
         if(!is_null($data)) {
             extract($data);
         }
-        require_once '././Views/templates/' . $tpl . '.php';
+        require_once '././View/templates/' . $tpl . '.php';
     }
 }

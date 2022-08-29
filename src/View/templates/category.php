@@ -15,7 +15,7 @@
                 <div class="mb-3">
                     <?php
                     foreach ($listProduct as $product) {
-                        echo "<a href=\"/product/view?idProduct={$product->id}\" type=\"button\" class=\"btn btn-link\">{$product->name}</a><br>";
+                        echo "<a href=\"/product/view?productId={$product->id}\" type=\"button\" class=\"btn btn-link\">{$product->name}</a><br>";
                     }
                     ?>
                     <a class="btn btn-primary" href="/category/view" role="button">Go Categories</a>

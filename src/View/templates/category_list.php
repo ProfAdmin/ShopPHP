@@ -15,7 +15,7 @@
                 <div class="mb-3">
                     <?php
                     foreach ($listCategories as $category) {
-                        echo "<a href=\"/product/category?idCategory={$category->id}\" type=\"button\" class=\"btn btn-link\">{$category->name}</a>";
+                        echo "<a href=\"/product/category?categoryId={$category->id}\" type=\"button\" class=\"btn btn-link\">{$category->name}</a>";
                     }
                     ?>
                     <a class="btn btn-primary" href="/" role="button">Go Home</a>
