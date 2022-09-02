@@ -16,7 +16,7 @@ class CategoryController
 
     public function showCategories(): void
     {
-        $tplData['listCategories'] = $this->categoryService->getAll();
+        $tplData['categoriesList'] = $this->categoryService->getAll();
         View::render('category_list', $tplData);
     }
 }

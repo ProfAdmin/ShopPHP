@@ -17,7 +17,7 @@
                     <p><b>Description: </b><?= $product->description ?></p>
                     <p><b>Picture: </b><?= $product->picture ?></p>
                     <p><b>Price: </b><?= $product->price ?></p>
-                    <p><b>Category: </b><?= $nameCategory ?></p>
+                    <p><b>Category: </b><?= $categoryName ?></p>
                     <a class="btn btn-primary" href="/" role="button">Go Home</a>
                 </div>
         </div>

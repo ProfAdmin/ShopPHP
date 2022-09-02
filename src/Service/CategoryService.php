@@ -2,8 +2,8 @@
 
 namespace Service;
 
+use Model\Category;
 use Repository\CategoryRepository;
-use View\Views;
 
 class CategoryService
 {
@@ -19,9 +19,8 @@ class CategoryService
         return $this->categoryRepository->getAll();
     }
 
-    public function getName(int $categoryId = null): ?string
+    public function getById(int $categoryId): ?Category
     {
-        $categoryId = is_null($categoryId) ? $_GET['categoryId'] ?? 0 : $categoryId;
-        return $this->categoryRepository->getNameById($categoryId);
+        return $this->categoryRepository->getById($categoryId);
     }
 }

@@ -7,7 +7,9 @@ use Model\Category;
 class CategoryRepository
 {
     private const FILE = 'categories.json';
+
     private FileStorage $fileStorage;
+
     public array $categories;
 
     public function __construct(FileStorage $fileStorage)
@@ -28,10 +30,5 @@ class CategoryRepository
     public function getById(int $id): ?Category
     {
         return $this->categories[$id];
-    }
-
-    public function getNameById(int $id): ?string
-    {
-        return $this->categories[$id]->name;
     }
 }

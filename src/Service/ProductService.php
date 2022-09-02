@@ -2,6 +2,7 @@
 
 namespace Service;
 
+use Model\AddProduct;
 use Model\Product;
 use Repository\ProductRepository;
 
@@ -14,28 +15,18 @@ class ProductService
         $this->productRepository = $productRepository;
     }
 
-    public function getByCategory(): ?array
+    public function getByCategory(int $categoryId): ?array
     {
-        $categoryId = $_GET['categoryId'] ?? 0;
         return $this->productRepository->getByCategory($categoryId);
     }
 
-    public function getById(): ?Product
+    public function getById(int $productId): ?Product
     {
-        $productId = $_GET['productId'] ?? 0;
         return $this->productRepository->getById($productId);
     }
 
-    public function add(): int
+    public function add(AddProduct $addProduct): int
     {
-        if (!empty($_POST)) {
-            $name = $_POST['name'] ?? '';
-            $description = $_POST['description'] ?? '';
-            $picture = $_POST['picture'] ?? '';
-            $price = $_POST['price'] ?? 0;
-            $categoryId = $_POST['categoryId'] ?? 0;
-            return $this->productRepository->add($name, $description, $picture, $price, $categoryId);
-        }
-        return 0;
+        return $this->productRepository->add($addProduct);
     }
 }

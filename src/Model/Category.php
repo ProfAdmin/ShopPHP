@@ -5,6 +5,7 @@ namespace Model;
 class Category
 {
     public int $id;
+
     public string $name;
 
     public function __construct(int $id, string $name)

@@ -2,12 +2,15 @@
 
 namespace Repository;
 
+use Model\AddProduct;
 use Model\Product;
 
 class ProductRepository
 {
     private const FILE = 'products.json';
+
     private FileStorage $fileStorage;
+
     public array $products;
 
     public function __construct(FileStorage $fileStorage)
@@ -37,28 +40,21 @@ class ProductRepository
         return $this->products[$id];
     }
 
-    public function add(
-        string $name,
-        string $description,
-        string $picture,
-        int $price,
-        int $categoryId
-    ): int|false {
-        if (!isset($product->id)) {
-            ksort($this->products);
-            $newId = array_key_last($this->products) + 1;
-            $this->products[$newId] = new Product(
-                $newId,
-                $name,
-                $description,
-                $picture,
-                $price,
-                $categoryId
-            );
-            $this->save();
-            return $newId;
-        }
-        return false;
+    public function add(AddProduct $addProduct): int
+    {
+        ksort($this->products);
+        $newId = array_key_last($this->products) + 1;
+        $this->products[$newId] = new Product(
+            $newId,
+            $addProduct->name,
+            $addProduct->description,
+            $addProduct->picture,
+            $addProduct->price,
+            $addProduct->categoryId
+        );
+        $this->save();
+
+        return $newId;
     }
 
     public function getByCategory(int $categoryId): ?array

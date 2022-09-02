@@ -7,7 +7,9 @@ use Controller\ProductController;
 class Route
 {
     private HomePage $homePage;
+
     private CategoryController $categoryController;
+
     private ProductController $productController;
 
     public function __construct(
@@ -25,22 +27,22 @@ class Route
         $request = explode("?", $_SERVER['REQUEST_URI']);
         $path = reset($request);
         switch ($path) {
-            case '/' :
+            case '/':
                 $this->homePage->show();
                 break;
-            case '/category/view' :
+            case '/category/view':
                 $this->categoryController->showCategories();
                 break;
-            case '/product/category' :
+            case '/product/category':
                 $this->productController->showProductByCategory();
                 break;
-            case '/product/view' :
+            case '/product/view':
                 $this->productController->showProduct();
                 break;
-            case '/product/addForm' :
+            case '/product/addForm':
                 $this->productController->showFormAddProduct();
                 break;
-            case '/product/add' :
+            case '/product/add':
                 $this->productController->addProduct();
                 break;
             default:

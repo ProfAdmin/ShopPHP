@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\Product;
+use Model\AddProduct;
 use Service\CategoryService;
 use Service\ProductService;
 use View\View;
@@ -10,6 +10,7 @@ use View\View;
 class ProductController
 {
     private CategoryService $categoryService;
+
     private ProductService $productService;
 
     public function __construct(CategoryService $categoryService, ProductService $productService)
@@ -20,15 +21,17 @@ class ProductController
 
     public function showProductByCategory(): void
     {
-        $tplData['listProduct'] = $this->productService->getByCategory();
-        $tplData['nameCategory'] = $this->categoryService->getName();
+        $categoryId = $_GET['categoryId'] ?? 0;
+        $tplData['productList'] = $this->productService->getByCategory($categoryId);
+        $tplData['categoryName'] = $this->categoryService->getById($categoryId)->name;
         View::render('category', $tplData);
     }
 
     public function showProduct(): void
     {
-        $tplData['product'] = $this->productService->getById();
-        $tplData['nameCategory'] = $this->categoryService->getName($tplData['product']->categoryId);
+        $productId = $_GET['productId'] ?? 0;
+        $tplData['product'] = $this->productService->getById($productId);
+        $tplData['categoryName'] = $this->categoryService->getById($tplData['product']->categoryId)->name;
         View::render('product', $tplData);
     }
 
@@ -40,7 +43,17 @@ class ProductController
 
     public function addProduct(): void
     {
-        $tplData['newId'] = $this->productService->add();
+        if (!empty($_POST)) {
+            $name = $_POST['name'] ?? '';
+            $description = $_POST['description'] ?? '';
+            $picture = $_POST['picture'] ?? '';
+            $price = $_POST['price'] ?? 0;
+            $categoryId = $_POST['categoryId'] ?? 0;
+            $newProduct = new AddProduct($name, $description, $picture, $price, $categoryId);
+            $tplData['newId'] = $this->productService->add($newProduct);
+        } else {
+            $tplData['newId'] = 0;
+        }
         View::render('add_product_successful', $tplData);
     }
 }

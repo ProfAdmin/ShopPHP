@@ -2,10 +2,8 @@
 
 namespace Model;
 
-class Product
+class AddProduct
 {
-    public int $id;
-
     public string $name;
 
     public string $description;
@@ -17,14 +15,12 @@ class Product
     public int $categoryId;
 
     public function __construct(
-        int $id,
         string $name,
         string $description,
         string $picture,
         int $price,
         int $categoryId
     ) {
-        $this->id = $id;
         $this->name = $name;
         $this->description = $description;
         $this->picture = $picture;
