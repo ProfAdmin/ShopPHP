@@ -1,28 +1,32 @@
 <?php
 
-namespace App\Controller;
+namespace App\UI\Controller;
 
-use Doctrine\Persistence\ManagerRegistry;
+use App\BLL\Service\ProductService;
+use App\UI\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\ProductType;
 
 class FormAddProductController extends AbstractController
 {
+    public function __construct(
+        private RequestStack $requestStack,
+        private ProductService $productService
+    ) {
+    }
+
     #[Route('/product/addForm', name: 'app_form_add_product')]
-    public function index(ManagerRegistry $doctrine, Request $request): Response
+    public function addForm(): Response
     {
         $form = $this->createForm(ProductType::class);
 
-        $form->handleRequest($request);
+        $form->handleRequest($this->requestStack->getCurrentRequest());
 
         if ($form->isSubmitted()) {
-            $entityManager = $doctrine->getManager();
             $product = $form->getData();
-            $entityManager->persist($product);
-            $entityManager->flush();
+            $this->productService->add($product);
 
             $urlHomePage = $this->generateUrl('app_home');
             $urlAddProduct = $this->generateUrl('app_form_add_product');
