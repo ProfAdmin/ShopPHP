@@ -3,26 +3,25 @@
 namespace App\UI\Controller;
 
 use App\BLL\Service\ProductService;
-use App\UI\Form\ProductType;
+use App\UI\Form\AddProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FormAddProductController extends AbstractController
 {
     public function __construct(
-        private RequestStack $requestStack,
         private ProductService $productService
     ) {
     }
 
     #[Route('/product/addForm', name: 'app_form_add_product')]
-    public function addForm(): Response
+    public function addForm(Request $request): Response
     {
-        $form = $this->createForm(ProductType::class);
+        $form = $this->createForm(AddProductType::class);
 
-        $form->handleRequest($this->requestStack->getCurrentRequest());
+        $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $product = $form->getData();

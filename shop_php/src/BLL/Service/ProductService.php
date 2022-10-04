@@ -12,14 +12,14 @@ class ProductService
     ) {
     }
 
-    public function getById($productId): Product
+    public function getById(int $id): Product
     {
-        return $this->productRepository->find($productId);
+        return $this->productRepository->find($id);
     }
 
-    public function getByCategory($categoryId): array
+    public function getByCategory(int $categoryId): array
     {
-        return $this->productRepository->findBy(['categoryId' => $categoryId]);
+        return $this->productRepository->findByCategoryId($categoryId);
     }
 
     public function add(Product $product): void
