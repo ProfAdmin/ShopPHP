@@ -5,17 +5,17 @@ services:
     ports:
       - "6080:80"
     volumes:
-      - ./php:/var/www/html
+      - ./shop_php:/var/www/html
     environment:
       XDEBUG_CONFIG: "client_host=host.docker.internal"
-  mysql:
-    image: mysql:latest
+  postgres:
+    image: postgres:14.5
     environment:
-      MYSQL_DATABASE: shop_db
-      MYSQL_USER: user_db
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: root_password
-    ports:
-      - "33306:3306"
+      - POSTGRES_DB=shop
+      - POSTGRES_USER=shop
+      - POSTGRES_PASSWORD=shop_pass
+      - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - ./data:/var/lib/mysql
+        - .:/var/lib/postgresql/data
+    ports:
+        - "5432:5432"
